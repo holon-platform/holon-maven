@@ -1,0 +1,434 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.holon-platform</groupId>
+	<artifactId>parent</artifactId>
+	<version>1.0.0</version>
+
+	<packaging>pom</packaging>
+
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>Parent POM for Holon platform projects</description>
+
+	<url>https://holon-platform.com</url>
+
+	<organization>
+		<name>Holon TDCN</name>
+		<url>https://holon-platform.com</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>Apache License Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Holon development team</name>
+			<email>dev@holon-platform.com</email>
+			<organization>Holon TDCN</organization>
+			<organizationUrl>https://holon-platform.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<!-- <connection>scm:https:https://github.com/holon-framework/holon-maven.git</connection> -->
+		<!-- <developerConnection>scm:https:https://github.com/holon-framework/holon-maven.git</developerConnection> -->
+		<!-- <url>https://github.com/holon-framework/holon-maven</url> -->
+		<developerConnection>scm:svn:svn://aximisvn/holon/holon-maven/parent/trunk</developerConnection>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Java -->
+		<java.compiler.source>1.8</java.compiler.source>
+		<java.compiler.target>1.8</java.compiler.target>
+
+		<!-- Maven plugins -->
+		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+		<maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
+		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
+		<license-maven-plugin.version>1.12</license-maven-plugin.version>
+		<maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>2.20</maven-failsafe-plugin.version>
+		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+		<docker-maven-plugin.version>0.20.1</docker-maven-plugin.version>
+
+		<!-- JaCoCo -->
+		<jacoco.maven.version>0.7.9</jacoco.maven.version>
+
+		<!-- Test -->
+		<junit.version>4.12</junit.version>
+		<mockito.version>2.7.22</mockito.version>
+		<logback.version>1.2.3</logback.version>
+
+		<!-- Asciidoc -->
+		<asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
+
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- JUnit -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<!-- Mockito -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+			</dependency>
+			<!-- Logback -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+
+		<plugins>
+
+			<!-- Compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.compiler.source}</source>
+					<target>${java.compiler.target}</target>
+					<encoding>UTF-8</encoding>
+					<compilerArgument>-Xlint:unchecked</compilerArgument>
+				</configuration>
+			</plugin>
+
+			<!-- JaCoCo -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- Assembly -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven-assembly-plugin.version}</version>
+			</plugin>
+
+		</plugins>
+
+		<!-- Plugin definitions -->
+
+		<pluginManagement>
+			<plugins>
+
+				<!-- Sources -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>sources-jar</id>
+							<phase>package</phase>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+							<configuration>
+								<!-- Only include java files -->
+								<includes>
+									<include>**/*.java</include>
+								</includes>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- Javadoc -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc-plugin.version}</version>
+					<configuration>
+						<charset>UTF-8</charset>
+						<docencoding>UTF-8</docencoding>
+						<keywords>true</keywords>
+					</configuration>
+				</plugin>
+
+				<!-- Asciidoc -->
+				<plugin>
+					<groupId>org.asciidoctor</groupId>
+					<artifactId>asciidoctor-maven-plugin</artifactId>
+					<version>${asciidoctor.maven.plugin.version}</version>
+				</plugin>
+
+				<!-- Licenses -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>license-maven-plugin</artifactId>
+					<version>${license-maven-plugin.version}</version>
+				</plugin>
+
+				<!-- Release -->
+
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>${nexus-staging-maven-plugin.version}</version>
+					<extensions>true</extensions>
+					<configuration>
+						<!-- <serverId>ossrh</serverId> -->
+						<!-- <nexusUrl>https://oss.sonatype.org/</nexusUrl> -->
+
+						<!-- autoReleaseAfterClose to false to inspect release before confirm -->
+						<!-- If all ok: mvn nexus-staging:release -->
+						<!-- If not: mvn nexus-staging:drop -->
+						<autoReleaseAfterClose>false</autoReleaseAfterClose>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven-release-plugin.version}</version>
+					<configuration>
+						<tagNameFormat>@{project.version}</tagNameFormat>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<useReleaseProfile>false</useReleaseProfile>
+						<releaseProfiles>release</releaseProfiles>
+						<goals>deploy</goals>
+					</configuration>
+				</plugin>
+
+				<!-- JaCoCo -->
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco.maven.version}</version>
+					<executions>
+						<execution>
+							<id>pre-unit-test</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+							<configuration>
+								<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+								<propertyName>surefireArgLine</propertyName>
+							</configuration>
+						</execution>
+						<execution>
+							<id>post-unit-test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+							<configuration>
+								<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+								<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- Surfire -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<argLine>${surefireArgLine}</argLine>
+					</configuration>
+				</plugin>
+
+				<!-- failsafe -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin.version}</version>
+				</plugin>
+
+				<!-- GPG -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${maven-gpg-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- Docker -->
+				<plugin>
+					<groupId>io.fabric8</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>${docker-maven-plugin.version}</version>
+					<configuration>
+						<showLogs>true</showLogs>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
+	</build>
+
+	<profiles>
+
+		<!-- Asciidoc documentation to html -->
+		<profile>
+			<id>docs-to-html</id>
+			<activation>
+				<file>
+					<exists>${basedir}/src/docs/asciidoc</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Asciidoc to html -->
+					<plugin>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctor-maven-plugin</artifactId>
+						<configuration>
+							<sourceDirectory>src/docs/asciidoc</sourceDirectory>
+							<attributes>
+								<endpoint-url>https://holon-platform.com/documentation</endpoint-url>
+								<sourcedir>${project.build.sourceDirectory}</sourcedir>
+								<project-version>${project.version}</project-version>
+							</attributes>
+						</configuration>
+						<executions>
+							<execution>
+								<id>asciidoc-to-html</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>process-asciidoc</goal>
+								</goals>
+								<configuration>
+									<backend>html5</backend>
+									<preserveDirectories>true</preserveDirectories>
+									<sourceHighlighter>coderay</sourceHighlighter>
+									<attributes>
+										<imagesdir>./images</imagesdir>
+										<examplesdir>${project.basedir}/src/main/java</examplesdir>
+										<icons>font</icons>
+										<sectanchors>true</sectanchors>
+										<!-- set the idprefix to blank -->
+										<idprefix />
+										<idseparator>-</idseparator>
+										<linkcss>false</linkcss>
+										<docinfo1>true</docinfo1>
+										<docinfodir>${project.basedir}/src/docs/asciidoc</docinfodir>
+										<last-update-label>false</last-update-label>
+										<theme>flask</theme>
+									</attributes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- deleting empty directories in output directory of Ascii Doctor -->
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>delete-empty-dirs</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<delete includeemptydirs="true">
+											<fileset dir="${project.build.directory}/generated-docs">
+												<and>
+													<size value="0" />
+													<type type="dir" />
+												</and>
+											</fileset>
+										</delete>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Download licenses -->
+		<profile>
+			<id>licenses</id>
+			<build>
+				<plugins>
+					<!-- licenses -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>license-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>download-licenses</id>
+								<goals>
+									<goal>download-licenses</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Release -->
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<!-- sources -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<configuration>
+							<!-- Only include java files -->
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+						</configuration>
+					</plugin>
+					<!-- sign -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+					</plugin>
+					<!-- Nexus release -->
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
