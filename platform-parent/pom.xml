@@ -35,11 +35,15 @@
 		</developer>
 	</developers>
 
+	<issueManagement>
+		<url>https://github.com/holon-platform/holon-maven/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+
 	<scm>
-		<!-- <connection>scm:https:https://github.com/holon-framework/holon-maven.git</connection> -->
-		<!-- <developerConnection>scm:https:https://github.com/holon-framework/holon-maven.git</developerConnection> -->
-		<!-- <url>https://github.com/holon-framework/holon-maven</url> -->
-		<developerConnection>scm:svn:svn://aximisvn/holon/holon-maven/parent/trunk</developerConnection>
+		<connection>scm:git:https://github.com/holon-platform/holon-maven.git</connection>
+		<url>https://github.com/holon-platform/holon-maven</url>
+		<developerConnection>scm:git:https://github.com/holon-platform/holon-maven.git</developerConnection>
 	</scm>
 
 	<properties>
