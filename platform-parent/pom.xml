@@ -412,12 +412,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
-						<configuration>
-							<!-- Only include java files -->
-							<includes>
-								<include>**/*.java</include>
-							</includes>
-						</configuration>
 					</plugin>
 					<!-- sign -->
 					<plugin>
