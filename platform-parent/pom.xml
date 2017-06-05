@@ -410,7 +410,7 @@
 				<repository>
 					<id>bintray-holon-pre-releases</id>
 					<name>Bintray pre-releases repository</name>
-					<url>https://api.bintray.com/maven/holon-platform/pre-releases/${project.artifactId}/;publish=1</url>
+					<url>https://api.bintray.com/maven/holon-platform/pre-releases/${bintray.package}/;publish=1</url>
 				</repository>
 			</distributionManagement>
 			<build>
