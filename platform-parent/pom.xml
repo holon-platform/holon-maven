@@ -79,6 +79,9 @@
 		<!-- Asciidoc -->
 		<asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
 
+		<!-- Git scm server id in settings.xml -->
+		<project.scm.id>git-scm-server</project.scm.id>
+		
 	</properties>
 
 	<dependencyManagement>
