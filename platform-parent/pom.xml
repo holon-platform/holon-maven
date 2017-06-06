@@ -56,6 +56,7 @@
 
 		<!-- Maven plugins -->
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
 		<maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
 		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
@@ -81,7 +82,7 @@
 
 		<!-- Git scm server id in settings.xml -->
 		<project.scm.id>git-scm-server</project.scm.id>
-		
+
 	</properties>
 
 	<dependencyManagement>
@@ -131,13 +132,6 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
 
-			<!-- Assembly -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven-assembly-plugin.version}</version>
-			</plugin>
-
 		</plugins>
 
 		<!-- Plugin definitions -->
@@ -150,21 +144,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>${maven-source-plugin.version}</version>
-					<executions>
-						<execution>
-							<id>sources-jar</id>
-							<phase>package</phase>
-							<goals>
-								<goal>jar</goal>
-							</goals>
-							<configuration>
-								<!-- Only include java files -->
-								<includes>
-									<include>**/*.java</include>
-								</includes>
-							</configuration>
-						</execution>
-					</executions>
 				</plugin>
 
 				<!-- Javadoc -->
@@ -177,6 +156,37 @@
 						<docencoding>UTF-8</docencoding>
 						<keywords>true</keywords>
 					</configuration>
+				</plugin>
+
+				<!-- Enforcer -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${maven-enforcer-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>enforce-maven</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireMavenVersion>
+										<version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
+										<message>Maven 2.1.0 and 2.2.0 produce incorrect GPG
+											signatures and checksums respectively.</message>
+									</requireMavenVersion>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- Assembly -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven-assembly-plugin.version}</version>
 				</plugin>
 
 				<!-- Asciidoc -->
@@ -202,7 +212,6 @@
 						<tagNameFormat>@{project.version}</tagNameFormat>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 						<useReleaseProfile>false</useReleaseProfile>
-						<releaseProfiles>apidocs</releaseProfiles>
 					</configuration>
 				</plugin>
 
@@ -419,6 +428,33 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
+						<configuration>
+							<!-- Only include java files -->
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- Javadocs -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
@@ -437,10 +473,42 @@
 			</distributionManagement>
 			<build>
 				<plugins>
+					<!-- Enforcer -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
+					</plugin>
 					<!-- sources -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
+						<configuration>
+							<!-- Only include java files -->
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- Javadocs -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 					<!-- GPG -->
 					<plugin>
