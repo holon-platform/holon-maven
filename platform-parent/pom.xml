@@ -451,6 +451,7 @@
 						<executions>
 							<execution>
 								<id>attach-javadocs</id>
+								<phase>prepare-package</phase>
 								<goals>
 									<goal>jar</goal>
 								</goals>
@@ -460,38 +461,16 @@
 							</execution>
 							<!-- Aggregate javadocs -->
 							<execution>
-								<id>aggregate</id>
-								<phase>prepare-package</phase>
+								<id>aggregate-javadocs</id>
+								<phase>package</phase>
 								<goals>
-									<goal>aggregate</goal>
+									<goal>aggregate-jar</goal>
 								</goals>
 								<configuration>
 									<show>public</show>
 									<excludePackageNames>*.internal.*;*.examples.*</excludePackageNames>
 									<quiet>true</quiet>
 								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<!-- Assembly javadocs -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>${project.artifactId}-${project.version}</finalName>
-							<descriptors>
-								<descriptor>${project.basedir}/javadocs-assembly.xml</descriptor>
-							</descriptors>
-							<ignoreMissingDescriptor>true</ignoreMissingDescriptor>
-						</configuration>
-						<executions>
-							<execution>
-								<id>assembly-docs</id>
-								<phase>package</phase>
-								<goals>
-									<goal>single</goal>
-								</goals>
 							</execution>
 						</executions>
 					</plugin>
@@ -543,6 +522,7 @@
 						<executions>
 							<execution>
 								<id>attach-javadocs</id>
+								<phase>prepare-package</phase>
 								<goals>
 									<goal>jar</goal>
 								</goals>
@@ -552,38 +532,16 @@
 							</execution>
 							<!-- Aggregate javadocs -->
 							<execution>
-								<id>aggregate</id>
-								<phase>prepare-package</phase>
+								<id>aggregate-javadocs</id>
+								<phase>package</phase>
 								<goals>
-									<goal>aggregate</goal>
+									<goal>aggregate-jar</goal>
 								</goals>
 								<configuration>
 									<show>public</show>
 									<excludePackageNames>*.internal.*;*.examples.*</excludePackageNames>
 									<quiet>true</quiet>
 								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<!-- Assembly javadocs -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>${project.artifactId}-${project.version}</finalName>
-							<descriptors>
-								<descriptor>${project.basedir}/javadocs-assembly.xml</descriptor>
-							</descriptors>
-							<ignoreMissingDescriptor>true</ignoreMissingDescriptor>
-						</configuration>
-						<executions>
-							<execution>
-								<id>assembly-docs</id>
-								<phase>package</phase>
-								<goals>
-									<goal>single</goal>
-								</goals>
 							</execution>
 						</executions>
 					</plugin>
