@@ -458,19 +458,6 @@
 									<quiet>true</quiet>
 								</configuration>
 							</execution>
-							<!-- Aggregate javadocs -->
-							<execution>
-								<id>aggregate-javadocs</id>
-								<phase>package</phase>
-								<goals>
-									<goal>aggregate-jar</goal>
-								</goals>
-								<configuration>
-									<show>public</show>
-									<excludePackageNames>*.internal.*;*.examples.*</excludePackageNames>
-									<quiet>true</quiet>
-								</configuration>
-							</execution>
 						</executions>
 					</plugin>
 				</plugins>
@@ -526,19 +513,6 @@
 									<goal>jar</goal>
 								</goals>
 								<configuration>
-									<quiet>true</quiet>
-								</configuration>
-							</execution>
-							<!-- Aggregate javadocs -->
-							<execution>
-								<id>aggregate-javadocs</id>
-								<phase>package</phase>
-								<goals>
-									<goal>aggregate-jar</goal>
-								</goals>
-								<configuration>
-									<show>public</show>
-									<excludePackageNames>*.internal.*;*.examples.*</excludePackageNames>
 									<quiet>true</quiet>
 								</configuration>
 							</execution>
