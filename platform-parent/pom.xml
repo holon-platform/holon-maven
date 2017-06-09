@@ -477,9 +477,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
-						<configuration>
-							<releaseProfiles>apidocs</releaseProfiles>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>
@@ -543,9 +540,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
-						<configuration>
-							<releaseProfiles>apidocs</releaseProfiles>
-						</configuration>
 					</plugin>
 					<!-- GPG -->
 					<plugin>
