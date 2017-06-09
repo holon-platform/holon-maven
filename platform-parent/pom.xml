@@ -61,12 +61,10 @@
 		<maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
 		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
-		<license-maven-plugin.version>1.12</license-maven-plugin.version>
 		<maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
 		<maven-failsafe-plugin.version>2.20</maven-failsafe-plugin.version>
 		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
 		<nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
 		<docker-maven-plugin.version>0.20.1</docker-maven-plugin.version>
 		<maven-remote-resources-plugin.version>1.5</maven-remote-resources-plugin.version>
@@ -140,6 +138,25 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
 
+			<!-- Import shared resources -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-remote-resources-plugin</artifactId>
+				<version>${maven-remote-resources-plugin.version}</version>
+				<configuration>
+					<resourceBundles>
+						<resourceBundle>com.holon-platform:holon-shared:${shared-resources.version}</resourceBundle>
+					</resourceBundles>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 
 		<!-- Plugin definitions -->
@@ -195,6 +212,13 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>${maven-assembly-plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>com.holon-platform</groupId>
+							<artifactId>holon-shared</artifactId>
+							<version>${shared-resources.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 
 				<!-- Asciidoc -->
@@ -202,6 +226,63 @@
 					<groupId>org.asciidoctor</groupId>
 					<artifactId>asciidoctor-maven-plugin</artifactId>
 					<version>${asciidoctor.maven.plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoctorj-pdf</artifactId>
+							<version>${asciidoctorj.pdf.version}</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<sourceDirectory>src/docs/asciidoc/reference</sourceDirectory>
+						<sourceHighlighter>coderay</sourceHighlighter>
+						<attributes>
+							<endpoint-url>https://holon-platform.com</endpoint-url>
+							<sourcedir>${project.build.sourceDirectory}</sourcedir>
+							<project-version>${project.version}</project-version>
+							<examplesdir>${project.basedir}/src/main/java</examplesdir>
+							<imagesDir>${project.build.directory}/maven-shared-archive-resources/documentation</imagesDir>
+							<icons>font</icons>
+							<idprefix />
+							<idseparator>-</idseparator>
+							<docinfo1>true</docinfo1>
+							<docinfodir>${project.build.directory}/maven-shared-archive-resources/documentation</docinfodir>
+							<last-update-label>false</last-update-label>
+							<theme>flask</theme>
+						</attributes>
+					</configuration>
+					<executions>
+						<!-- HTML -->
+						<execution>
+							<id>asciidoc-to-html</id>
+							<phase>package</phase>
+							<goals>
+								<goal>process-asciidoc</goal>
+							</goals>
+							<configuration>
+								<backend>html5</backend>
+								<attributes>
+									<sectanchors>true</sectanchors>
+									<linkcss>true</linkcss>
+								</attributes>
+							</configuration>
+						</execution>
+						<!-- PDF -->
+						<execution>
+							<id>asciidoc-to-pdf</id>
+							<phase>package</phase>
+							<goals>
+								<goal>process-asciidoc</goal>
+							</goals>
+							<configuration>
+								<backend>pdf</backend>
+								<attributes>
+									<pagenums />
+									<toc />
+								</attributes>
+							</configuration>
+						</execution>
+					</executions>
 				</plugin>
 
 				<!-- Licenses -->
@@ -343,166 +424,6 @@
 
 	<profiles>
 
-		<!-- Asciidoc documentation -->
-		<profile>
-			<id>generate-docs</id>
-			<build>
-				<plugins>
-					<!-- Import shared resources -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-remote-resources-plugin</artifactId>
-						<version>${maven-remote-resources-plugin.version}</version>
-						<configuration>
-							<resourceBundles>
-								<resourceBundle>com.holon-platform:holon-shared:${shared-resources.version}</resourceBundle>
-							</resourceBundles>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>process</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<!-- Asciidoc reference documentation to HTML and PDF -->
-					<plugin>
-						<groupId>org.asciidoctor</groupId>
-						<artifactId>asciidoctor-maven-plugin</artifactId>
-						<dependencies>
-							<dependency>
-								<groupId>org.asciidoctor</groupId>
-								<artifactId>asciidoctorj-pdf</artifactId>
-								<version>${asciidoctorj.pdf.version}</version>
-							</dependency>
-						</dependencies>
-						<configuration>
-							<sourceDirectory>src/docs/asciidoc/reference</sourceDirectory>
-							<sourceHighlighter>coderay</sourceHighlighter>
-							<attributes>
-								<endpoint-url>https://holon-platform.com</endpoint-url>
-								<sourcedir>${project.build.sourceDirectory}</sourcedir>
-								<project-version>${project.version}</project-version>
-								<examplesdir>${project.basedir}/src/main/java</examplesdir>
-								<imagesDir>${project.build.directory}/maven-shared-archive-resources/documentation</imagesDir>
-								<icons>font</icons>
-								<idprefix />
-								<idseparator>-</idseparator>
-								<docinfo1>true</docinfo1>
-								<docinfodir>${project.build.directory}/maven-shared-archive-resources/documentation</docinfodir>
-								<last-update-label>false</last-update-label>
-								<theme>flask</theme>
-							</attributes>
-						</configuration>
-						<executions>
-							<!-- HTML -->
-							<execution>
-								<id>asciidoc-to-html</id>
-								<phase>package</phase>
-								<goals>
-									<goal>process-asciidoc</goal>
-								</goals>
-								<configuration>
-									<backend>html5</backend>
-									<attributes>
-										<sectanchors>true</sectanchors>
-										<linkcss>true</linkcss>
-									</attributes>
-								</configuration>
-							</execution>
-							<!-- PDF -->
-							<execution>
-								<id>asciidoc-to-pdf</id>
-								<phase>package</phase>
-								<goals>
-									<goal>process-asciidoc</goal>
-								</goals>
-								<configuration>
-									<backend>pdf</backend>
-									<attributes>
-										<pagenums />
-										<toc />
-									</attributes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<!-- deleting empty directories in output directory of Ascii Doctor -->
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>${maven-antrun-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>delete-empty-dirs</id>
-								<phase>generate-resources</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<target name="delete-generated-docs-empty-dirs">
-										<delete includeemptydirs="true" failonerror="false"
-											verbose="false">
-											<fileset dir="${generated-docs.dir}">
-												<and>
-													<size value="0" />
-													<type type="dir" />
-												</and>
-											</fileset>
-										</delete>
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<!-- Assembly docs -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<configuration>
-							<ignoreMissingDescriptor>true</ignoreMissingDescriptor>
-							<appendAssemblyId>true</appendAssemblyId>
-							<finalName>${project.artifactId}-${project.version}</finalName>
-							<descriptors>
-								<descriptor>src/main/assembly/docs-assembly.xml</descriptor>
-							</descriptors>
-						</configuration>
-						<executions>
-							<execution>
-								<id>assembly-docs</id>
-								<phase>package</phase>
-								<goals>
-									<goal>single</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- Download licenses -->
-		<profile>
-			<id>licenses</id>
-			<build>
-				<plugins>
-					<!-- licenses -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>license-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>download-licenses</id>
-								<goals>
-									<goal>download-licenses</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
 		<!-- Pre-releases -->
 		<profile>
 			<id>pre-release</id>
@@ -557,7 +478,7 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
 						<configuration>
-							<releaseProfiles>apidocs,generate-docs</releaseProfiles>
+							<releaseProfiles>apidocs</releaseProfiles>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -623,7 +544,7 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
 						<configuration>
-							<releaseProfiles>apidocs,generate-docs</releaseProfiles>
+							<releaseProfiles>apidocs</releaseProfiles>
 						</configuration>
 					</plugin>
 					<!-- GPG -->
