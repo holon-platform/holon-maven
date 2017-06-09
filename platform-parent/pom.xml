@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.holon-platform</groupId>
@@ -365,7 +366,7 @@
 							</execution>
 						</executions>
 					</plugin>
-					<!-- Asciidoc to html -->
+					<!-- Asciidoc reference documentation to HTML and PDF -->
 					<plugin>
 						<groupId>org.asciidoctor</groupId>
 						<artifactId>asciidoctor-maven-plugin</artifactId>
@@ -377,7 +378,7 @@
 							</dependency>
 						</dependencies>
 						<configuration>
-							<sourceDirectory>src/docs/asciidoc</sourceDirectory>
+							<sourceDirectory>src/docs/asciidoc/reference</sourceDirectory>
 							<sourceHighlighter>coderay</sourceHighlighter>
 							<attributes>
 								<endpoint-url>https://holon-platform.com</endpoint-url>
@@ -440,7 +441,8 @@
 								</goals>
 								<configuration>
 									<target name="delete-generated-docs-empty-dirs">
-										<delete includeemptydirs="true" failonerror="false" verbose="false">
+										<delete includeemptydirs="true" failonerror="false"
+											verbose="false">
 											<fileset dir="${generated-docs.dir}">
 												<and>
 													<size value="0" />
