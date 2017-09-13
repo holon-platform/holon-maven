@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.holon-platform</groupId>
@@ -55,9 +56,9 @@
 		<java.compiler.target>1.8</java.compiler.target>
 
 		<!-- Maven plugins -->
-		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
-		<maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
+		<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
 		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
 		<maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
@@ -77,11 +78,11 @@
 		<logback.version>1.2.3</logback.version>
 
 		<!-- Shared resources -->
-		<shared-resources.version>1.0.0</shared-resources.version>
+		<shared-resources.version>1.0.1-SNAPSHOT</shared-resources.version>
 
 		<!-- Asciidoc -->
 		<asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
-		<asciidoctorj.pdf.version>1.5.0-alpha.15</asciidoctorj.pdf.version>
+		<asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
 
 		<generated-docs.dir>${project.build.directory}/generated-docs</generated-docs.dir>
 
@@ -240,7 +241,7 @@
 							<sourcedir>${project.build.sourceDirectory}</sourcedir>
 							<project-version>${project.version}</project-version>
 							<examplesdir>${project.basedir}/src/main/java</examplesdir>
-							<imagesDir>${project.build.directory}/maven-shared-archive-resources/documentation</imagesDir>
+							<imagesDir>images</imagesDir>
 							<icons>font</icons>
 							<idprefix />
 							<idseparator>-</idseparator>
@@ -376,6 +377,7 @@
 						<serverId>sonatype-nexus-staging</serverId>
 						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 						<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						<stagingProgressTimeoutMinutes>10</stagingProgressTimeoutMinutes>
 					</configuration>
 				</plugin>
 
