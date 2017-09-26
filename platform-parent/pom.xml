@@ -248,6 +248,7 @@
 							<docinfodir>${project.build.directory}/maven-shared-archive-resources/documentation</docinfodir>
 							<last-update-label>false</last-update-label>
 							<theme>flask</theme>
+							<tabsize>2</tabsize>
 						</attributes>
 					</configuration>
 					<executions>
