@@ -78,7 +78,7 @@
 		<logback.version>1.2.3</logback.version>
 
 		<!-- Shared resources -->
-		<shared-resources.version>1.0.5</shared-resources.version>
+		<shared-resources.version>1.0.4</shared-resources.version>
 
 		<!-- Asciidoc -->
 		<asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
