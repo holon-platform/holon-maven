@@ -69,7 +69,7 @@
 		<maven-remote-resources-plugin.version>1.5</maven-remote-resources-plugin.version>
 
 		<!-- JaCoCo -->
-		<jacoco.maven.version>0.8.0</jacoco.maven.version>
+		<jacoco.maven.version>0.8.1</jacoco.maven.version>
 
 		<!-- Test -->
 		<junit.version>4.12</junit.version>
