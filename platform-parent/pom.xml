@@ -72,10 +72,12 @@
 		<maven-remote-resources-plugin.version>1.5</maven-remote-resources-plugin.version>
 
 		<!-- JaCoCo -->
-		<jacoco.maven.version>0.8.1</jacoco.maven.version>
+		<jacoco.maven.version>0.8.2</jacoco.maven.version>
 
 		<!-- Test -->
 		<junit.version>4.12</junit.version>
+		
+		<!-- Logger -->
 		<logback.version>1.2.3</logback.version>
 
 		<!-- Shared resources -->
