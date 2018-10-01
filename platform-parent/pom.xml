@@ -74,9 +74,10 @@
 		<!-- JaCoCo -->
 		<jacoco.maven.version>0.8.2</jacoco.maven.version>
 
-		<!-- Test -->
-		<junit.version>4.12</junit.version>
-		
+		<!-- JUnit -->
+		<junit.jupiter.api.version>5.3.1</junit.jupiter.api.version>
+		<junit.jupiter.engine.version>5.3.1</junit.jupiter.engine.version>
+
 		<!-- Logger -->
 		<logback.version>1.2.3</logback.version>
 
@@ -96,18 +97,28 @@
 
 	<dependencyManagement>
 		<dependencies>
+
 			<!-- JUnit -->
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${junit.jupiter.api.version}</version>
+				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${junit.jupiter.engine.version}</version>
+				<scope>test</scope>
+			</dependency>
+
 			<!-- Logback -->
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
