@@ -76,7 +76,6 @@
 
 		<!-- Test -->
 		<junit.version>4.12</junit.version>
-		<mockito.version>2.15.0</mockito.version>
 		<logback.version>1.2.3</logback.version>
 
 		<!-- Shared resources -->
@@ -101,19 +100,12 @@
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
-			<!-- Mockito -->
-			<dependency>
-				<groupId>org.mockito</groupId>
-				<artifactId>mockito-core</artifactId>
-				<version>${mockito.version}</version>
-			</dependency>
 			<!-- Logback -->
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
