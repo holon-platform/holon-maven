@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.holon-platform</groupId>
@@ -55,7 +57,7 @@
 		<java.compiler.target>1.8</java.compiler.target>
 
 		<!-- Maven plugins -->
-		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
 		<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
@@ -66,7 +68,7 @@
 		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
 		<nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-		<docker-maven-plugin.version>0.26.0</docker-maven-plugin.version>
+		<docker-maven-plugin.version>0.27.1</docker-maven-plugin.version>
 		<maven-remote-resources-plugin.version>1.5</maven-remote-resources-plugin.version>
 
 		<!-- JaCoCo -->
@@ -560,5 +562,19 @@
 		</profile>
 
 	</profiles>
+
+	<!-- For Spring milestones - should be removed when no more necessary -->
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<url>https://repo.spring.io/milestone</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<url>https://repo.spring.io/milestone</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
