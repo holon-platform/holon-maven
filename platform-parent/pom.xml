@@ -56,11 +56,11 @@
 
 		<!-- Maven plugins -->
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
-		<maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
-		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-		<maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
+		<maven-assembly-plugin.version>3.2.0</maven-assembly-plugin.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
@@ -70,11 +70,11 @@
 		<maven-remote-resources-plugin.version>1.6.0</maven-remote-resources-plugin.version>
 
 		<!-- JaCoCo -->
-		<jacoco.maven.version>0.8.4</jacoco.maven.version>
+		<jacoco.maven.version>0.8.5</jacoco.maven.version>
 
 		<!-- JUnit -->
-		<junit.jupiter.api.version>5.4.2</junit.jupiter.api.version>
-		<junit.jupiter.engine.version>5.4.2</junit.jupiter.engine.version>
+		<junit.jupiter.api.version>5.5.2</junit.jupiter.api.version>
+		<junit.jupiter.engine.version>5.5.2</junit.jupiter.engine.version>
 
 		<!-- Logger -->
 		<logback.version>1.2.3</logback.version>
@@ -84,7 +84,7 @@
 
 		<!-- Asciidoc -->
 		<asciidoctor.maven.plugin.version>1.6.0</asciidoctor.maven.plugin.version>
-		<asciidoctorj.pdf.version>1.5.0-alpha.17</asciidoctorj.pdf.version>
+		<asciidoctorj.pdf.version>1.5.0-beta.8</asciidoctorj.pdf.version>
 
 		<generated-docs.dir>${project.build.directory}/generated-docs</generated-docs.dir>
 
