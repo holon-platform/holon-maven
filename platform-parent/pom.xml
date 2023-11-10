@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.holon-platform</groupId>
@@ -42,7 +44,8 @@
 	<scm>
 		<connection>scm:git:https://github.com/holon-platform/holon-maven.git</connection>
 		<url>https://github.com/holon-platform/holon-maven</url>
-		<developerConnection>scm:git:https://github.com/holon-platform/holon-maven.git</developerConnection>
+		<developerConnection>
+			scm:git:https://github.com/holon-platform/holon-maven.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -50,9 +53,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<!-- Java -->
-		<java.compiler.source>1.8</java.compiler.source>
-		<java.compiler.target>1.8</java.compiler.target>
+		<maven.compiler.release>11</maven.compiler.release>
 
 		<!-- Maven plugins -->
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -80,9 +81,9 @@
 		<logback.version>1.2.3</logback.version>
 
 		<!-- Shared resources -->
-		<shared-resources.version>1.0.6</shared-resources.version>
+		<shared-resources.version>1.0.7-SNAPSHOT</shared-resources.version>
 
-		<!-- Asciidoc --> 
+		<!-- Asciidoc -->
 		<asciidoctor.maven.plugin.version>1.6.0</asciidoctor.maven.plugin.version>
 		<asciidoctorj.pdf.version>1.5.3</asciidoctorj.pdf.version>
 
@@ -130,8 +131,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>${java.compiler.source}</source>
-					<target>${java.compiler.target}</target>
+					<release>${maven.compiler.release}</release>
 					<encoding>UTF-8</encoding>
 					<compilerArgument>-Xlint:unchecked</compilerArgument>
 				</configuration>
@@ -150,7 +150,8 @@
 				<version>${maven-remote-resources-plugin.version}</version>
 				<configuration>
 					<resourceBundles>
-						<resourceBundle>com.holon-platform:holon-shared:${shared-resources.version}</resourceBundle>
+						<resourceBundle>
+							com.holon-platform:holon-shared:${shared-resources.version}</resourceBundle>
 					</resourceBundles>
 				</configuration>
 				<executions>
@@ -210,8 +211,10 @@
 								<rules>
 									<requireMavenVersion>
 										<version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
-										<message>Maven 2.1.0 and 2.2.0 produce incorrect GPG
-											signatures and checksums respectively.</message>
+										<message>Maven 2.1.0 and 2.2.0 produce
+											incorrect GPG
+											signatures and checksums
+											respectively.</message>
 									</requireMavenVersion>
 								</rules>
 							</configuration>
@@ -257,7 +260,8 @@
 							<idprefix />
 							<idseparator>-</idseparator>
 							<docinfo1>true</docinfo1>
-							<docinfodir>${project.build.directory}/maven-shared-archive-resources/documentation</docinfodir>
+							<docinfodir>
+								${project.build.directory}/maven-shared-archive-resources/documentation</docinfodir>
 							<last-update-label>false</last-update-label>
 							<theme>flask</theme>
 							<tabsize>2</tabsize>
@@ -291,7 +295,8 @@
 								<attributes>
 									<pagenums />
 									<toc />
-									<pdf-stylesdir>${project.build.directory}/maven-shared-archive-resources/documentation/theme</pdf-stylesdir>
+									<pdf-stylesdir>
+										${project.build.directory}/maven-shared-archive-resources/documentation/theme</pdf-stylesdir>
 									<pdf-style>holon</pdf-style>
 								</attributes>
 							</configuration>
@@ -323,7 +328,8 @@
 								<goal>prepare-agent</goal>
 							</goals>
 							<configuration>
-								<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+								<destFile>
+									${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
 								<propertyName>surefireArgLine</propertyName>
 							</configuration>
 						</execution>
@@ -334,8 +340,10 @@
 								<goal>report</goal>
 							</goals>
 							<configuration>
-								<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
-								<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+								<dataFile>
+									${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+								<outputDirectory>
+									${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
 							</configuration>
 						</execution>
 					</executions>
@@ -409,7 +417,8 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-remote-resources-plugin</artifactId>
+										<artifactId>
+											maven-remote-resources-plugin</artifactId>
 										<versionRange>[1.0,)</versionRange>
 										<goals>
 											<goal>process</goal>
@@ -440,7 +449,8 @@
 				<repository>
 					<id>sonatype-nexus-staging</id>
 					<name>Nexus release repository</name>
-					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+					<url>
+						https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 				</repository>
 			</distributionManagement>
 			<build>
