@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.holon-platform</groupId>
@@ -51,39 +53,39 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<maven.compiler.release>11</maven.compiler.release>
+		<maven.compiler.release>21</maven.compiler.release>
 
 		<!-- Maven plugins -->
-		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
-		<maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
-		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-		<nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-		<docker-maven-plugin.version>0.27.2</docker-maven-plugin.version>
-		<maven-remote-resources-plugin.version>1.7.0</maven-remote-resources-plugin.version>
+		<maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+		<maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
+		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+		<maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version>
+		<maven-release-plugin.version>3.1.1</maven-release-plugin.version>
+		<maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
+		<nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
+		<docker-maven-plugin.version>0.46.0</docker-maven-plugin.version>
+		<maven-remote-resources-plugin.version>3.3.0</maven-remote-resources-plugin.version>
 
 		<!-- JaCoCo -->
-		<jacoco.maven.version>0.8.5</jacoco.maven.version>
+		<jacoco.maven.version>0.8.13</jacoco.maven.version>
 
 		<!-- JUnit -->
-		<junit.jupiter.api.version>5.6.2</junit.jupiter.api.version>
-		<junit.jupiter.engine.version>5.6.2</junit.jupiter.engine.version>
+		<junit.jupiter.api.version>5.12.2</junit.jupiter.api.version>
+		<junit.jupiter.engine.version>5.12.2</junit.jupiter.engine.version>
 
 		<!-- Logger -->
-		<logback.version>1.2.3</logback.version>
+		<logback.version>1.5.18</logback.version>
 
 		<!-- Shared resources -->
-		<shared-resources.version>1.1.0</shared-resources.version>
+		<shared-resources.version>2.0.0</shared-resources.version>
 
 		<!-- Asciidoc -->
-		<asciidoctor.maven.plugin.version>1.6.0</asciidoctor.maven.plugin.version>
-		<asciidoctorj.pdf.version>1.5.3</asciidoctorj.pdf.version>
+		<asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
+		<asciidoctorj.pdf.version>2.3.19</asciidoctorj.pdf.version>
 
 		<generated-docs.dir>${project.build.directory}/generated-docs</generated-docs.dir>
 
@@ -91,6 +93,15 @@
 		<project.scm.id>git-scm-server</project.scm.id>
 
 	</properties>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencyManagement>
 		<dependencies>
@@ -132,6 +143,11 @@
 					<release>${maven.compiler.release}</release>
 					<encoding>UTF-8</encoding>
 					<compilerArgument>-Xlint:unchecked</compilerArgument>
+					<compilerArgs>
+						<arg>-parameters</arg>
+					</compilerArgs>
+					<!-- Spring/Boot upgrade -->
+					<parameters>true</parameters>
 				</configuration>
 			</plugin>
 
