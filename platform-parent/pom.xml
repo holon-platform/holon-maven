@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.holon-platform</groupId>
@@ -64,7 +66,9 @@
 		<maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version>
 		<maven-release-plugin.version>3.1.1</maven-release-plugin.version>
 		<maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
-		<nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
+		<!--
+		<nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version> -->
+		<sonatype-maven-plugin.version>0.9.0</sonatype-maven-plugin.version>
 		<docker-maven-plugin.version>0.46.0</docker-maven-plugin.version>
 		<maven-remote-resources-plugin.version>3.3.0</maven-remote-resources-plugin.version>
 
@@ -79,7 +83,7 @@
 		<logback.version>1.5.18</logback.version>
 
 		<!-- Shared resources -->
-		<shared-resources.version>2.0.0</shared-resources.version>
+		<shared-resources.version>2.0.1</shared-resources.version>
 
 		<!-- Asciidoc -->
 		<asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
@@ -394,7 +398,7 @@
 					</executions>
 				</plugin>
 
-				<!-- Nexus staging -->
+				<!-- Nexus staging OLD
 				<plugin>
 					<groupId>org.sonatype.plugins</groupId>
 					<artifactId>nexus-staging-maven-plugin</artifactId>
@@ -407,6 +411,18 @@
 						<stagingProgressTimeoutMinutes>10</stagingProgressTimeoutMinutes>
 					</configuration>
 				</plugin>
+				-->
+				<plugin>
+					<groupId>org.sonatype.central</groupId>
+					<artifactId>central-publishing-maven-plugin</artifactId>
+					<version>${sonatype-maven-plugin.version}</version>
+					<extensions>true</extensions>
+					<configuration>
+						<publishingServerId>central</publishingServerId>
+						<autoPublish>true</autoPublish>
+					</configuration>
+				</plugin>
+
 
 				<!-- Docker -->
 				<plugin>
@@ -462,7 +478,7 @@
 					<id>sonatype-nexus-staging</id>
 					<name>Nexus release repository</name>
 					<url>
-						https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+						https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
 				</repository>
 			</distributionManagement>
 			<build>
